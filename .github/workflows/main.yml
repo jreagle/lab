@@ -23,4 +23,4 @@ jobs:
         with:
           http_url: https://portaldatransparencia.gov.br/download-de-dados/convenios/20230203
           downloaded_filename: data/convenios/zip/br_gov_portaldatransparencia_convenios_20230203.zip
-          postprocess: postprocess.ts
+          # postprocess: postprocess.ts
