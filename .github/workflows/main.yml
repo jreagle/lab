@@ -22,5 +22,5 @@ jobs:
         uses: githubocto/flat@v3
         with:
           http_url: https://portaldatransparencia.gov.br/download-de-dados/convenios/20230203
-          downloaded_filename: br_gov_portaldatransparencia_convenios_20230203.zip
+          downloaded_filename: data/zip/br_gov_portaldatransparencia_convenios_20230203.zip
           postprocess: postprocess.ts
