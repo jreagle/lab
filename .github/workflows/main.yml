@@ -3,12 +3,21 @@ name: Flat
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 3 * * 4'
+    - cron: '30 6 * * 4'
 
 jobs:
   scheduled:
     runs-on: ubuntu-latest
     steps:
+      # This step build variable "DateRef" to assign URL and FILENAME source!
+      - name: Build DateRef
+        id: builddate  # this is used on variable path
+        run: |
+          WeekDay=$(date +%w)
+          LastFriday=$(date +'%Y%m%d' -d "$((WeekDay+2)) day ago")
+          PrevFriday=$(date +'%Y%m%d' -d "$((WeekDay+9)) day ago") 
+          if [[ $WeekDay -lt 4 ]]; then DateRef=$PrevFriday; else DateRef=$LastFriday; fi
+          echo "dateref=$DateRef" >> $GITHUB_OUTPUT
       # This step installs Deno, which is a new Javascript runtime that improves on Node. Can be used for an optional postprocessing step
       - name: Setup deno
         uses: denoland/setup-deno@main
@@ -21,6 +30,6 @@ jobs:
       - name: Fetch data
         uses: githubocto/flat@v3
         with:
-          http_url: https://portaldatransparencia.gov.br/download-de-dados/convenios/20230203
-          downloaded_filename: data/convenios/zip/br_gov_portaldatransparencia_convenios_20230203.zip
+          http_url: https://portaldatransparencia.gov.br/download-de-dados/convenios/${{ steps.builddate.outputs.dateref }}
+          downloaded_filename: data/convenios/zip/br_gov_portaldatransparencia_convenios_${{ steps.builddate.outputs.dateref }}.zip
           # postprocess: postprocess.ts
