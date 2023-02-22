@@ -8,7 +8,11 @@ jobs:
       - name: Get current date
         id: version  # this is used on variable path
         run: |
-          echo "builddate=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+          WeekDay=$(date +%w)
+          LastFriday=$(date +'%Y%m%d' -d "$((WeekDay+2)) day ago")
+          PrevFriday=$(date +'%Y%m%d' -d "$((WeekDay+9)) day ago") 
+          if [[ $WeekDay -lt 4 ]]; then DateRef=$PrevFriday; else DateRef=$LastFriday; fi
+          echo "builddate=$DateRef" >> $GITHUB_OUTPUT
         
       - name: Test with environment variables
         run: echo $DATA_SOURCE_URL - $DATA_SOURCE_FILENAME
