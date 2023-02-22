@@ -1,15 +1,1 @@
-{
-  "date": "2023-02-01T00:18:11.779Z",
-  "files": [
-    {
-      "name": "btc-price-postprocessed.json",
-      "deltaBytes": 0,
-      "source": "https://api.coindesk.com/v2/bpi/currentprice.json"
-    },
-    {
-      "name": "btc-price.json",
-      "deltaBytes": 1,
-      "source": "https://api.coindesk.com/v2/bpi/currentprice.json"
-    }
-  ]
-}
+[{"currency":"United States Dollar","bitcoinRate":"23,078.0638"},{"currency":"British Pound Sterling","bitcoinRate":"19,283.8455"},{"currency":"Euro","bitcoinRate":"22,481.4035"},{"currency":"Chinese Yuan","bitcoinRate":"40,202.5000"}]
