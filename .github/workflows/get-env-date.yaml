@@ -6,11 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
-        id: date
+        id: version  # this is used on variable path
         run: |
-          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+          echo "builddate=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        
       - name: Test with environment variables
         run: echo $TAG_NAME - $RELEASE_NAME
         env:
-          TAG_NAME: nightly-tag-${{ env.date }}
-          RELEASE_NAME: nightly-release-${{ env.date }}
+          TAG_NAME: nightly-tag-${{ steps.version.outputs.builddate }}
+          RELEASE_NAME: nightly-release-${{ steps.version.outputs.builddate }}
