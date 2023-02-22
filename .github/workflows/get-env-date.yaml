@@ -6,16 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
-        id: version  # this is used on variable path
+        id: builddate  # this is used on variable path
         run: |
           WeekDay=$(date +%w)
           LastFriday=$(date +'%Y%m%d' -d "$((WeekDay+2)) day ago")
           PrevFriday=$(date +'%Y%m%d' -d "$((WeekDay+9)) day ago") 
           if [[ $WeekDay -gt 4 ]]; then DateRef=$PrevFriday; else DateRef=$LastFriday; fi
-          echo "builddate=$DateRef" >> $GITHUB_OUTPUT
+          echo "dateref=$DateRef" >> $GITHUB_OUTPUT
         
       - name: Test with environment variables
-        run: echo $DATA_SOURCE_URL - $DATA_SOURCE_FILENAME
+        run: echo DATE_REF; echo $DATA_SOURCE_URL; echo $DATA_SOURCE_FILENAME
         env:
-          DATA_SOURCE_URL: https://portaldatransparencia.gov.br/download-de-dados/convenios/${{ steps.version.outputs.builddate }}
-          DATA_SOURCE_FILENAME: data/convenios/zip/br_gov_portaldatransparencia_convenios_${{ steps.version.outputs.builddate }}.zip
+          DATE_REF: ${{ steps.builddate.outputs.dateref }}
+          DATA_SOURCE_URL: https://portaldatransparencia.gov.br/download-de-dados/convenios/${{ steps.builddate.outputs.dateref }}
+          DATA_SOURCE_FILENAME: data/convenios/zip/br_gov_portaldatransparencia_convenios_${{ steps.buiddate.outputs.dateref }}.zip
