@@ -8,10 +8,10 @@ jobs:
       - name: Get current date
         id: version  # this is used on variable path
         run: |
-          echo "builddate=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+          echo "builddate=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
         
       - name: Test with environment variables
-        run: echo $TAG_NAME - $RELEASE_NAME
+        run: echo $DATA_SOURCE_URL - $DATA_SOURCE_FILENAME
         env:
-          TAG_NAME: nightly-tag-${{ steps.version.outputs.builddate }}
-          RELEASE_NAME: nightly-release-${{ steps.version.outputs.builddate }}
+          DATA_SOURCE_URL: https://portaldatransparencia.gov.br/download-de-dados/convenios/${{ steps.version.outputs.builddate }}
+          DATA_SOURCE_FILENAME: data/convenios/zip/br_gov_portaldatransparencia_convenios_${{ steps.version.outputs.builddate }}.zip
