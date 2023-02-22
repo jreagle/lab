@@ -11,7 +11,7 @@ jobs:
           WeekDay=$(date +%w)
           LastFriday=$(date +'%Y%m%d' -d "$((WeekDay+2)) day ago")
           PrevFriday=$(date +'%Y%m%d' -d "$((WeekDay+9)) day ago") 
-          if [[ $WeekDay -lt 4 ]]; then DateRef=$PrevFriday; else DateRef=$LastFriday; fi
+          if [[ $WeekDay -gt 4 ]]; then DateRef=$PrevFriday; else DateRef=$LastFriday; fi
           echo "builddate=$DateRef" >> $GITHUB_OUTPUT
         
       - name: Test with environment variables
