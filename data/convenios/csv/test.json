@@ -1,0 +1,15 @@
+{
+  "date": "2023-02-01T00:18:11.779Z",
+  "files": [
+    {
+      "name": "btc-price-postprocessed.json",
+      "deltaBytes": 0,
+      "source": "https://api.coindesk.com/v2/bpi/currentprice.json"
+    },
+    {
+      "name": "btc-price.json",
+      "deltaBytes": 1,
+      "source": "https://api.coindesk.com/v2/bpi/currentprice.json"
+    }
+  ]
+}
